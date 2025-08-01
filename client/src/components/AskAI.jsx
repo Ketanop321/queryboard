@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { PaperAirplaneIcon, SparklesIcon } from '@heroicons/react/24/solid';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
+import { ENDPOINTS } from '../config/api';
 
 const AskAI = () => {
   const [question, setQuestion] = useState('');
@@ -35,11 +36,13 @@ const AskAI = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/ask', {
+      const response = await fetch(ENDPOINTS.ASK, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        // Remove credentials: 'include' since we're not using cookies/sessions
+        // credentials: 'include',
         body: JSON.stringify({ question }),
       });
 
