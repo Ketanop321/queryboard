@@ -1,32 +1,29 @@
 # QueryBoard – Smart Feedback Tracker + AI Assistant
 
-A full-stack web application that allows users to submit feedback and ask questions to an AI assistant powered by Hugging Face's language models.
-
-![QueryBoard Screenshot](https://via.placeholder.com/1200x600/1a1a2e/e94560?text=QueryBoard+Screenshot)
-
-## Features
+A full-stack web application that allows users to submit feedback and chat with an AI assistant powered by Google's Gemini API.
 
 - 📝 Submit and manage feedback with categories
-- 💬 Chat with an AI assistant powered by Hugging Face
-- 🌓 Light and dark mode
+- 💬 Chat with an AI assistant powered by Google Gemini
+- 🌓 Light and dark mode support
 - 🎨 Modern, responsive UI with smooth animations
 - 📱 Mobile-friendly design
 - 🚀 Fast and efficient state management
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **Frontend**: React, Tailwind CSS, Framer Motion
 - **Backend**: Node.js, Express
-- **AI**: Hugging Face Inference API
+- **AI**: Google Gemini API
 - **Styling**: Tailwind CSS with custom animations
+- **State Management**: React Context API
 
-## Prerequisites
+## 📋 Prerequisites
 
-- Node.js (v14 or later)
-- npm or yarn
-- Hugging Face API key (free)
+- Node.js (v16 or later)
+- npm (v8 or later) or yarn
+- Google Gemini API key (free)
 
-## Getting Started
+## 🚀 Quick Start
 
 ### 1. Clone the repository
 
@@ -38,38 +35,50 @@ cd queryboard
 ### 2. Set up the backend
 
 ```bash
+# Navigate to server directory
 cd server
+
+# Install dependencies
 npm install
+
+# Create and configure environment file
 cp .env.example .env
 ```
 
-Edit the `.env` file and add your Hugging Face API key:
+Edit the `.env` file and add your Google Gemini API key:
 
 ```env
 PORT=5000
-HF_API_KEY=your_huggingface_api_key_here
+GEMINI_API_KEY=your_google_gemini_api_key_here
 ```
 
 ### 3. Set up the frontend
 
 ```bash
+# Navigate to client directory
 cd ../client
+
+# Install dependencies
 npm install
 ```
 
 ### 4. Start the development servers
 
-In one terminal, start the backend:
-
+#### Terminal 1 - Backend Server
 ```bash
+# Navigate to server directory
 cd server
-npm start
+
+# Start the backend server
+node app.js
 ```
 
-In another terminal, start the frontend:
-
+#### Terminal 2 - Frontend Development Server
 ```bash
+# Navigate to client directory
 cd client
+
+# Start the frontend development server
 npm start
 ```
 
@@ -80,7 +89,7 @@ The application should now be running at [http://localhost:3000](http://localhos
 ### Backend (server/.env)
 
 - `PORT`: The port the server will run on (default: 5000)
-- `HF_API_KEY`: Your Hugging Face API key
+
 
 ## Project Structure
 
@@ -102,27 +111,27 @@ queryboard/
 
 ## Available Scripts
 
-### Frontend (client directory)
+### Frontend (Client)
 
-- `npm start`: Start the development server
-- `npm test`: Run tests
-- `npm run build`: Build for production
+In the `client` directory, you can run:
 
-### Backend (server directory)
+#### `npm start`
 
-- `npm start`: Start the server
-- `npm run dev`: Start the server with nodemon (development)
+Runs the frontend in development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## Contributing
+### Backend (Server)
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+In the `server` directory, you can run:
 
-## License
+#### `npm start`
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Starts the Express server in development mode with hot-reload.
 
-## Acknowledgments
+## 🤖 AI Integration
 
-- [Hugging Face](https://huggingface.co/) for the amazing AI models
-- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
-- [Framer Motion](https://www.framer.com/motion/) for animations
+This project uses Google's Gemini API to power the AI chat functionality. To set it up:
+
+1. Get your free API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Add it to your `.env` file as `GEMINI_API_KEY`
+3. use gemini-flash model free

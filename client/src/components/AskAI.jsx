@@ -35,7 +35,7 @@ const AskAI = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/ask', {
+      const response = await fetch('/api/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,11 +43,17 @@ const AskAI = () => {
         body: JSON.stringify({ question }),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to get response from AI');
-      }
-
       const data = await response.json();
+      
+      if (!response.ok) {
+        console.error('Server error response:', data);
+        throw new Error(data.message || 'Failed to get response from AI');
+      }
+      
+      if (!data || !data.data || !data.data.answer) {
+        console.error('Unexpected response format:', data);
+        throw new Error('Unexpected response from AI service');
+      }
       
       const aiMessage = {
         id: Date.now() + 1,

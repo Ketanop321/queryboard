@@ -1,8 +1,19 @@
 {
+  "name": "queryboard-server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "node-fetch": "^3.3.2"
-  }
+    "node-fetch": "^2.7.0"
+  },
+  "type": "module"
 }

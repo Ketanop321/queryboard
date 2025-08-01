@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 /**
- * @desc    Get AI response from Hugging Face
+ * @desc    Get AI response from Google's Gemini
  * @route   POST /api/ask
  * @access  Public
  */
@@ -17,8 +17,8 @@ exports.askAI = async (req, res) => {
     }
 
     // Check if API key is configured
-    if (!process.env.HF_API_KEY) {
-      console.error('Hugging Face API key is not configured');
+    if (!process.env.GEMINI_API_KEY) {
+      console.error('Gemini API key is not configured');
       return res.status(500).json({
         success: false,
         message: 'Server configuration error',
@@ -26,50 +26,71 @@ exports.askAI = async (req, res) => {
       });
     }
 
+    console.log('Sending request to Gemini API...');
+    
     const response = await fetch(
-      'https://api-inference.huggingface.co/models/google/flan-t5-small',
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.GEMINI_API_KEY}`, 
       {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${process.env.HF_API_KEY}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          inputs: question,
-          parameters: {
-            max_length: 100,
-            temperature: 0.7,
-            do_sample: true
-          }
+          contents: [{
+            role: 'user',
+            parts: [{
+              text: question
+            }]
+          }]
         })
       }
     );
 
     if (!response.ok) {
-      const error = await response.text();
-      console.error('Hugging Face API error:', error);
-      return res.status(response.status).json({
-        success: false,
-        message: 'Error from AI service',
-        error: error
-      });
+      let errorData;
+      try {
+        errorData = await response.json();
+        console.error('Gemini API error:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorData
+        });
+      } catch (e) {
+        console.error('Failed to parse error response:', e);
+        throw new Error(`API request failed with status ${response.status}: ${response.statusText}`);
+      }
+      throw new Error(errorData.error?.message || 'Failed to get response from Gemini API');
     }
 
     const data = await response.json();
+    let answer = 'No response from AI';
+    
+    // Handle different response formats
+    if (data.candidates && data.candidates[0]?.content?.parts) {
+      answer = data.candidates[0].content.parts[0]?.text || answer;
+    } else if (data.choices && data.choices[0]?.message?.content) {
+      answer = data.choices[0].message.content;
+    } else if (data.text) {
+      answer = data.text;
+    }
+    
+    console.log('Gemini API response data:', JSON.stringify(data, null, 2));
+
+    console.log('Gemini API response received');
     
     res.status(200).json({
       success: true,
       data: {
         question,
-        answer: data[0]?.generated_text || "I'm not sure how to respond to that."
+        answer: answer.trim(),
+        model: 'gemini-pro'
       }
     });
-
   } catch (error) {
-    console.error('Error in askAI:', error);
+    console.error('Error in askAI controller:', error);
     res.status(500).json({
       success: false,
-      message: 'Server error',
+      message: 'Error processing your request',
       error: error.message
     });
   }
