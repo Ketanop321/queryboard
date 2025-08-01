@@ -1,13 +1,12 @@
 {
   "name": "queryboard-server",
   "version": "1.0.0",
+  "description": "Backend server for QueryBoard application with Gemini AI integration",
   "main": "app.js",
-  "engines": {
-    "node": ">=16.0.0"
-  },
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -15,5 +14,16 @@
     "express": "^5.1.0",
     "node-fetch": "^2.7.0"
   },
-  "type": "module"
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": [
+    "express",
+    "node",
+    "gemini",
+    "ai",
+    "api"
+  ],
+  "author": "",
+  "license": "MIT"
 }

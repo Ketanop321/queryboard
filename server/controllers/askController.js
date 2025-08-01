@@ -17,23 +17,24 @@ exports.askAI = async (req, res) => {
     }
 
     // Check if API key is configured
-    if (!process.env.GEMINI_API_KEY) {
-      console.error('Gemini API key is not configured');
+    if (!process.env.GOOGLE_API_KEY) {
+      console.error('Google API key is not configured');
       return res.status(500).json({
         success: false,
         message: 'Server configuration error',
-        error: 'API key not configured'
+        error: 'API key not configured. Please set GOOGLE_API_KEY in your environment variables.'
       });
     }
 
     console.log('Sending request to Gemini API...');
     
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.GEMINI_API_KEY}`, 
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent', 
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'x-goog-api-key': process.env.GOOGLE_API_KEY
         },
         body: JSON.stringify({
           contents: [{
