@@ -29,7 +29,7 @@ exports.askAI = async (req, res) => {
     console.log('Sending request to Gemini API...');
     
     const response = await fetch(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent', 
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent', 
       {
         method: 'POST',
         headers: {
@@ -84,7 +84,7 @@ exports.askAI = async (req, res) => {
       data: {
         question,
         answer: answer.trim(),
-        model: 'gemini-pro'
+        model: 'gemini-1.5-flash-latest'
       }
     });
   } catch (error) {
