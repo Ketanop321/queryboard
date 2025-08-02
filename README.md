@@ -42,7 +42,7 @@ cd server
 npm install
 
 # Create and configure environment file
-cp .env.example .env
+ .env
 ```
 
 Edit the `.env` file and add your Google Gemini API key:
@@ -81,13 +81,10 @@ cd client
 # Start the frontend development server
 npm start
 ```
-
+Frontend server will start on
 The application should now be running at [http://localhost:3000](http://localhost:3000).
 
-## Environment Variables
-
-### Backend (server/.env)
-
+Backend server will start on
 - `PORT`: The port the server will run on (default: 5000)
 
 
@@ -108,25 +105,6 @@ queryboard/
 │   └── .env            # Environment variables
 └── README.md
 ```
-
-## Available Scripts
-
-### Frontend (Client)
-
-In the `client` directory, you can run:
-
-#### `npm start`
-
-Runs the frontend in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### Backend (Server)
-
-In the `server` directory, you can run:
-
-#### `npm start`
-
-Starts the Express server in development mode with hot-reload.
 
 ## 🤖 AI Integration
 
