@@ -11,7 +11,9 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   'http://localhost:3000',
   'https://queryboard.onrender.com',
-  // Add your production frontend URL here when you deploy it
+  'https://queryboard.vercel.app',
+  'https://queryboard-ketan-kumars-projects-a5bf36ef.vercel.app',
+  'https://queryboard-git-main-ketan-kumars-projects-a5bf36ef.vercel.app'
 ];
 
 // CORS Middleware
