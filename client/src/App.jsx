@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     const fetchFeedbacks = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/feedback');
+        const response = await fetch('https://queryboard.onrender.com/api/feedback');
         if (!response.ok) {
           throw new Error('Failed to fetch feedbacks');
         }
@@ -34,7 +34,7 @@ function App() {
   // Handle new feedback submission
   const handleFeedbackSubmit = async (feedbackData) => {
     try {
-      const response = await fetch('http://localhost:5000/api/feedback', {
+      const response = await fetch('https://queryboard.onrender.com/api/feedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
